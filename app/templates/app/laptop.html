@@ -1,0 +1,40 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+  <div class="col-sm-3">
+    <div class="list-group">
+        <a href="{% url 'laptop' %}" class="list-group-item list-group-item-action bg-dark text-white hove">All Laptops</a>
+        <a href="{% url 'laptopdata' 'apple' %}" class="list-group-item list-group-item-action bg-dark text-white">Macbook</a>
+        <a href="{% url 'laptopdata' 'Alien-Ware' %}" class="list-group-item list-group-item-action bg-dark text-white">Alien</a>
+        <a href="{% url 'laptopdata' 'Azus' %}" class="list-group-item list-group-item-action bg-dark text-white">Azus</a>
+
+        <a href="{% url 'laptopdata' 'below' %}" class="list-group-item list-group-item-action bg-dark text-white">Below 50000</a>
+        <a href="{% url 'laptopdata' 'above' %}" class="list-group-item list-group-item-action bg-dark text-white">Above 50000</a>
+      </div>
+  </div>
+  <div class="col-sm-8 offset-sm-1">
+   <div class="row">
+    {% for b in laptop  %}
+    <div class="col-sm-6 text-center mb-4 ">
+
+        <a href="{% url 'product-detail' b.id %}" class="btn">
+            <div class="item bg-dark w-100">
+                <img src="{{b.product_image.url}}" alt="" height="200px">
+                <div class="fw-bold text-white">{{b.title}}</div>
+                <div class="fw-bold text-white">Rs. {{b.discounted_price}} 
+                    <small class="fw-light text-decoration-line-through my-3">{{b.selling_price}}</small>
+                </div>
+            </div>
+        </a>
+   </div>
+    
+    {% endfor %}
+
+   </div>
+  </div>
+ </div>
+</div>
+{% endblock main-content %}
